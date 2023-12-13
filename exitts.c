@@ -7,7 +7,7 @@
  *@n: the amount of characters to be copied
  *Return: the concatenated string
  */
-char *_strncpy(char *dest, char *src, int n)
+ char *_strncpy(char *dest, char *src, int n)
 {
 	int i, k;
 	char *s = dest;
@@ -37,7 +37,7 @@ char *_strncpy(char *dest, char *src, int n)
  *@n: amount of bytes to be maximally used
  *Return: the conc
  */
-char *_strncat(char *dest, char *src, int n)
+ char *_strncat(char *dest, char *src, int n)
 {
 	int i, k;
 	char *s = dest;
@@ -63,7 +63,7 @@ char *_strncat(char *dest, char *src, int n)
  *@c: character to look
  *Return: (s)
  */
-char *_strchr(char *s, char c)
+ char *_strchr(char *s, char c)
 {
 	do {
 		if (*s == c)
