@@ -27,22 +27,22 @@ int is_delim(char c, char *delim)
 
 /**
  *_isalpha - checks for alphabetic character
- *@c: character to input
- *Return: 1 c =  alphabetic, 0 otherwise
+ *@c: The character to input
+ *Return: 1 if c is alphabetic, 0 otherwise
  */
 
 int _isalpha(int c)
 {
-	if ((c >= 'a' && c <= 'b') || (c >= 'A' && c <= 'B'))
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
 	else
 		return (0);
 }
 
 /**
- *_atoi - conv string to integer
- *@s: string converted
- *Return: 0 string, converted number otherwise
+ *_atoi - converts a string to an integer
+ *@s: the string to be converted
+ *Return: 0 if no numbers in string, converted number otherwise
  */
 
 int _atoi(char *s)
@@ -59,7 +59,7 @@ int _atoi(char *s)
 		{
 			flag = 1;
 			result *= 10;
-			result += (s[j] - '0');
+			result += (s[i] - '0');
 		}
 		else if (flag == 1)
 			flag = 2;
