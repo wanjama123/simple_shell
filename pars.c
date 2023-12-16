@@ -23,7 +23,7 @@ int is_cmd(info_t *info, char *path)
 }
 
 /**
- * dup_chars - function duplicates characters
+ * dup_chars - duplicates characters
  * @pathstr: the PATH string
  * @start: starting index
  * @stop: stopping index
@@ -33,17 +33,17 @@ int is_cmd(info_t *info, char *path)
 char *dup_chars(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
-	int i = 0, j = 0;
+	int i = 0, k = 0;
 
-	for (j = 0, i = start; i < stop; i++)
+	for (k = 0, i = start; i < stop; i++)
 		if (pathstr[i] != ':')
-			buf[j++] = pathstr[i];
-	buf[j] = 0;
+			buf[k++] = pathstr[i];
+	buf[k] = 0;
 	return (buf);
 }
 
 /**
- * find_path - function finds this cmd in the PATH string
+ * find_path - finds this cmd in the PATH string
  * @info: the info struct
  * @pathstr: the PATH string
  * @cmd: the cmd to find
@@ -52,7 +52,7 @@ char *dup_chars(char *pathstr, int start, int stop)
  */
 char *find_path(info_t *info, char *pathstr, char *cmd)
 {
-	int j = 0, curr_pos = 0;
+	int i = 0, curr_pos = 0;
 	char *path;
 
 	if (!pathstr)
@@ -64,9 +64,9 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[j] || pathstr[j] == ':')
+		if (!pathstr[i] || pathstr[i] == ':')
 		{
-			path = dup_chars(pathstr, curr_pos, j);
+			path = dup_chars(pathstr, curr_pos, i);
 			if (!*path)
 				_strcat(path, cmd);
 			else
@@ -76,11 +76,11 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 			}
 			if (is_cmd(info, path))
 				return (path);
-			if (!pathstr[j])
+			if (!pathstr[i])
 				break;
-			curr_pos = j;
+			curr_pos = i;
 		}
-		j++;
+		i++;
 	}
 	return (NULL);
 }
