@@ -1,21 +1,21 @@
 #include "shell.h"
 
 /**
- * list_len - function determines length of linked list
+ * list_len - determines length of linked list
  * @h: pointer to first node
  *
  * Return: size of list
  */
 size_t list_len(const list_t *h)
 {
-	size_t j = 0;
+	size_t i = 0;
 
 	while (h)
 	{
 		h = h->next;
-		j++;
+		i++;
 	}
-	return (j);
+	return (i);
 }
 
 /**
@@ -27,30 +27,30 @@ size_t list_len(const list_t *h)
 char **list_to_strings(list_t *head)
 {
 	list_t *node = head;
-	size_t j = list_len(head), k;
+	size_t i = list_len(head), j;
 	char **strs;
 	char *str;
 
-	if (!head || !j)
+	if (!head || !i)
 		return (NULL);
-	strs = malloc(sizeof(char *) * (j + 1));
+	strs = malloc(sizeof(char *) * (i + 1));
 	if (!strs)
 		return (NULL);
-	for (j = 0; node; node = node->next, j++)
+	for (i = 0; node; node = node->next, i++)
 	{
 		str = malloc(_strlen(node->str) + 1);
 		if (!str)
 		{
-			for (k = 0; k < j; k++)
+			for (j = 0; j < i; j++)
 				free(strs[j]);
 			free(strs);
 			return (NULL);
 		}
 
 		str = _strcpy(str, node->str);
-		strs[j] = str;
+		strs[i] = str;
 	}
-	strs[j] = NULL;
+	strs[i] = NULL;
 	return (strs);
 }
 
@@ -63,7 +63,7 @@ char **list_to_strings(list_t *head)
  */
 size_t print_list(const list_t *h)
 {
-	size_t j = 0;
+	size_t i = 0;
 
 	while (h)
 	{
@@ -73,9 +73,9 @@ size_t print_list(const list_t *h)
 		_puts(h->str ? h->str : "(nil)");
 		_puts("\n");
 		h = h->next;
-		j++;
+		i++;
 	}
-	return (j);
+	return (i);
 }
 
 /**
@@ -101,7 +101,7 @@ list_t *node_starts_with(list_t *node, char *prefix, char c)
 }
 
 /**
- * get_node_index - function gets the index of a node
+ * get_node_index - gets the index of a node
  * @head: pointer to list head
  * @node: pointer to the node
  *
@@ -109,14 +109,14 @@ list_t *node_starts_with(list_t *node, char *prefix, char c)
  */
 ssize_t get_node_index(list_t *head, list_t *node)
 {
-	size_t j = 0;
+	size_t i = 0;
 
 	while (head)
 	{
 		if (head == node)
-			return (j);
+			return (i);
 		head = head->next;
-		j++;
+		i++;
 	}
 	return (-1);
 }
