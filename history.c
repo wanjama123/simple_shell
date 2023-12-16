@@ -54,14 +54,14 @@ int write_history(info_t *info)
 }
 
 /**
- * read_history - function reads history from file
+ * read_history - reads history from file
  * @info: the parameter struct
  *
  * Return: histcount on success, 0 otherwise
  */
 int read_history(info_t *info)
 {
-	int a, last = 0, linecount = 0;
+	int i, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;
 	struct stat st;
 	char *buf = NULL, *filename = get_history_file(info);
@@ -85,14 +85,14 @@ int read_history(info_t *info)
 	if (rdlen <= 0)
 		return (free(buf), 0);
 	close(fd);
-	for (a = 0; a < fsize; a++)
-		if (buf[a] == '\n')
+	for (i = 0; i < fsize; i++)
+		if (buf[i] == '\n')
 		{
-			buf[a] = 0;
+			buf[i] = 0;
 			build_history_list(info, buf + last, linecount++);
-			last = a + 1;
+			last = i + 1;
 		}
-	if (last != a)
+	if (last != i)
 		build_history_list(info, buf + last, linecount++);
 	free(buf);
 	info->histcount = linecount;
@@ -103,7 +103,7 @@ int read_history(info_t *info)
 }
 
 /**
- * build_history_list - function adds entry to a history linked list
+ * build_history_list - adds entry to a history linked list
  * @info: Structure containing potential arguments. Used to maintain
  * @buf: buffer
  * @linecount: the history linecount, histcount
@@ -124,7 +124,7 @@ int build_history_list(info_t *info, char *buf, int linecount)
 }
 
 /**
- * renumber_history - function renumbers the history linked list after changes
+ * renumber_history - renumbers the history linked list after changes
  * @info: Structure containing potential arguments. Used to maintain
  *
  * Return: the new histcount
@@ -132,12 +132,12 @@ int build_history_list(info_t *info, char *buf, int linecount)
 int renumber_history(info_t *info)
 {
 	list_t *node = info->history;
-	int a = 0;
+	int i = 0;
 
 	while (node)
 	{
-		node->num = a++;
+		node->num = i++;
 		node = node->next;
 	}
-	return (info->histcount = a);
+	return (info->histcount = i);
 }
